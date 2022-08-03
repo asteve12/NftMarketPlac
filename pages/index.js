@@ -18,7 +18,8 @@ export default function Home() {
    }, [])
   
   async function loadNfts() {
-    const provider = new ethers.providers.JsonRpcProvider()
+   
+    const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC)
     const tokenContract = new ethers.Contract(nftaddress,NFT.abi,provider)
     const marketContract = new ethers.Contract(nftMarketAddr,Market.abi,provider)
     const data = await marketContract.fetchMarketItems();
@@ -72,7 +73,7 @@ export default function Home() {
   return (
     <div className="flex justify-center">
       <div className='px-4' style={{ maxWidth: "1600px" }}>
-        <div className='grid grid-cols sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4'></div>
+        <div className='grid grid-cols sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4'>
         {
           nfts.map((nft, i) => {
             return (
@@ -90,7 +91,7 @@ export default function Home() {
                     className='w-full bg-pink-500 text-white 
                    font-bold py-2 px-12 rounded'
                     onClick={()=> buyNft(nft)}
-                  ></button>
+                  >buy</button>
                 </div>
 
               </div>
@@ -98,6 +99,8 @@ export default function Home() {
             
           })
         }
+        </div>
+      
       </div>
    
     </div>

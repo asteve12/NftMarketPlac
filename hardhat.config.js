@@ -1,9 +1,4 @@
 require("@nomicfoundation/hardhat-toolbox");
-const fs = require("fs")
-const privateKey = fs.readFileSync(".secret").toString()
-
-const projectId = "2cafc22ace1d4167acec9622129065c8"
-
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   networks: {
@@ -11,11 +6,9 @@ module.exports = {
       chainId: 1337,
     },
     mumbai: {
-      url: `https://polygon-mumbai.infura.io/v3/${projectId}`,
-      accounts:[privateKey]
+      url:process.env.NEXT_PUBLIC_RPC,
+      accounts:[process.env.NEXT_PUBLIC_PRIVATE_KEY]
     }
-   
-    
   },
   solidity: "0.8.9",
 };
