@@ -5,8 +5,8 @@ import Web3Modal from "web3modal"
 import { ethers } from 'ethers'
 import { useRouter } from 'next/router'
 import { nftaddress, nftMarketAddr } from '../.config'
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json"
-import Market from "../artifacts/contracts/NFTmarket.sol/NFTMarket.json"
+import NFT from "./abi/NFT.json"
+import Market from "./abi/NftMarket.json"
 
 
 const client = create({url:'https://ipfs.infura.io:5001/api/v0'})
