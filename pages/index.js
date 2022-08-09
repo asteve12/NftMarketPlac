@@ -78,7 +78,7 @@ export default function Home() {
           nfts.map((nft, i) => {
             return (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <img src={nft.image}></img>
+                <img className="w-full h-1/2 bg-yellow object-cover" src={nft.image}></img>
                 <div className='p-4'>
                   <p style={{ height: "64px" }} className="text-2xl font-semibold">{nft.name}</p>
                   <div style={{ height: "70px", overflow: "hidden" }}>

@@ -1,13 +1,13 @@
-# Sample Hardhat Project
-
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-GAS_REPORT=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+NFT Market Place.
+<hr/>
+<br/>
+<img src="./pages/images/Nft.png"></img>
+These projet is an Nftmarket that place that allow users to create token and put it up for liting. it is made with the ERC721 standard.
+ <h3> Technology USE</h3>
+ <ul>
+ <li>Solidity</li>
+  <li>Javascript</li>
+<li>Next.js</li>
+<li>IPFS</li>
+<li>tailwindCSs</li>
+ </ul>
