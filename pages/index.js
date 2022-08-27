@@ -14,11 +14,10 @@ export default function Home() {
   
   useEffect(() => {
     loadNfts()
-
-   }, [])
+  }, [])
   
   async function loadNfts() {
-   
+   console.log("my-provider",process.env.NEXT_PUBLIC_RPC)
     const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC)
     const tokenContract = new ethers.Contract(nftaddress,NFT.abi,provider)
     const marketContract = new ethers.Contract(nftMarketAddr,Market.abi,provider)
