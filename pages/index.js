@@ -24,6 +24,17 @@ export default function Home() {
     // })
     // const connection = await web3Modal.connect()
     // const provider = new ethers.providers.Web3Provider(connection)
+    //check if wallet installed
+    if (window.ethereum) {
+
+    
+    }
+    else {
+      alert("install wallet for site to functon properly")
+      return;
+      
+    }
+
     console.log("my-provider", process.env.NEXT_PUBLIC_RPC)
     let provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC);
     const tokenContract = new ethers.Contract(nftaddress,NFT.abi,provider)
@@ -58,26 +69,43 @@ export default function Home() {
   }
   
   async function buyNft(nft) {
+
     const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection)
-    
-    const signer = provider.getSigner()
-    const contract = new ethers.Contract(nftMarketAddr, Market.abi, signer)
-    
-    const price = ethers.utils.parseUnits(nft.price.toString(), "ether")
+    const { chainId } = await provider.getNetwork()
+    //check chainId
+    if (chainId !== 80001) {
+      alert("only polygon network is supported")
+      return;
+    }
 
-    const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {
-      value:price
-    })
-    await transaction.wait()
-    loadNfts();
-
+    try { 
+      const signer = provider.getSigner()
+      const contract = new ethers.Contract(nftMarketAddr, Market.abi, signer)
+      
+      const price = ethers.utils.parseUnits(nft.price.toString(), "ether")
+  
+      const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {
+        value:price
+      })
+      await transaction.wait()
+      loadNfts();
+  
+    } catch (e) {
+      console.log("errorMe", e)
+      let errorMsg = e.data.message.split("*")
+      alert(`an error occured ${errorMsg[0]}`)
+      
+    }
+    
+ 
   
   }
   
   return (
     <div className="flex justify-center">
+    
       <div className='px-4' style={{ maxWidth: "1600px" }}>
         <div className='grid grid-cols sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4'>
         {
