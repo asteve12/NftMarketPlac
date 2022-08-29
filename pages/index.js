@@ -17,13 +17,15 @@ export default function Home() {
   }, [])
   
   async function loadNfts() {
+ 
+    // const web3Modal = new Web3Modal({
+    //   network: "mainnet",
+    //   cacheProvider: true,
+    // })
+    // const connection = await web3Modal.connect()
+    // const provider = new ethers.providers.Web3Provider(connection)
     console.log("my-provider", process.env.NEXT_PUBLIC_RPC)
-    const web3Modal = new Web3Modal({
-      network: "mainnet",
-      cacheProvider: true,
-    })
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
+    let provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC);
     const tokenContract = new ethers.Contract(nftaddress,NFT.abi,provider)
     const marketContract = new ethers.Contract(nftMarketAddr,Market.abi,provider)
     const data = await marketContract.fetchMarketItems();
