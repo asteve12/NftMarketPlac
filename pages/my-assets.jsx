@@ -15,7 +15,23 @@ export default function MyAssets() {
         loadNFTs()
     }, [])
     
-    async function loadNFTs() {
+  async function loadNFTs() {
+
+    if (window.ethereum) {
+      if (chainId !== 80001) {
+        alert("only polygon network is supported")
+        return;
+      }
+
+    
+    }
+    else {
+      alert("install wallet for site to functon properly")
+      return;
+      
+      
+    }
+        
         const web3Modal = new Web3Modal()
         const connection = await web3Modal.connect()
         const provider = new ethers.providers.Web3Provider(connection)
