@@ -18,25 +18,16 @@ export default function MyAssets() {
   async function loadNFTs() {
 
     if (window.ethereum) {
+      const web3Modal = new Web3Modal()
+        const connection = await web3Modal.connect()
+        const provider = new ethers.providers.Web3Provider(connection)
+      const signer = provider.getSigner()
+      const { chainId } = await provider.getNetwork()
       if (chainId !== 80001) {
         alert("only polygon network is supported")
         return;
       }
-
-    
-    }
-    else {
-      alert("install wallet for site to functon properly")
-      return;
-      
-      
-    }
-        
-        const web3Modal = new Web3Modal()
-        const connection = await web3Modal.connect()
-        const provider = new ethers.providers.Web3Provider(connection)
-        const signer = provider.getSigner()
-          
+      else {
         const marketContract = new ethers.Contract(nftMarketAddr, Market.abi, signer)
         const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
         const data = await marketContract.fetchMyNFTs()
@@ -56,6 +47,20 @@ export default function MyAssets() {
         }))
         setNfts(items)
         setLoadingState('loaded') 
+      }
+
+    
+    }
+    else {
+      alert("install wallet for site to functon properly")
+      return;
+      
+      
+    }
+        
+        
+          
+   
     }
     
     if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
