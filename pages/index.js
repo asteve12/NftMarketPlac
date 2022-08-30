@@ -7,10 +7,13 @@ import { ethers } from 'ethers'
 import { nftaddress, nftMarketAddr } from '../.config'
 import NFT from "./abi/NFT.json"
 import Market from "./abi/NftMarket.json"
+import { PulseLoader } from 'react-spinners'
+
 
 export default function Home() {
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState("not-loaded")
+  const [showLoader, setLoader] = useState(false)
   
   useEffect(() => {
     loadNfts()
@@ -34,6 +37,8 @@ export default function Home() {
       
       
     }
+
+    setLoader(true)
 
     console.log("my-provider", process.env.NEXT_PUBLIC_RPC)
     let provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC);
@@ -59,6 +64,7 @@ export default function Home() {
     }))
     setNfts(items)
     setLoadingState("loaded")
+    setLoader(false)
   }
 
   if (loadingState === "loaded" && !nfts.length) {
@@ -101,6 +107,13 @@ export default function Home() {
     
  
   
+  }
+
+  if (showLoader === true) {
+    return <div className=" flex   justify-center items-center">
+      
+            <PulseLoader />
+    </div>
   }
   
   return (
