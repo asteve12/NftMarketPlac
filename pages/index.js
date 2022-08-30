@@ -31,7 +31,7 @@ export default function Home() {
     }
     else {
       alert("install wallet for site to functon properly")
-      return;
+      
       
     }
 
