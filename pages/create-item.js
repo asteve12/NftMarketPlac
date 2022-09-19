@@ -9,7 +9,7 @@ import NFT from "./abi/NFT.json"
 import Market from "./abi/NftMarket.json"
 
 
-const client = create({url:'https://ipfs.infura.io:5001/api/v0'})
+const client = create({url:'https://stev-market.infura-ipfs.io/api/v0'})
 
 export default function CreateItems() {
     const [fileUrl, setFileUrl] = useState(null);
@@ -28,7 +28,7 @@ export default function CreateItems() {
                 }
             )
           
-            const url =  `https://ipfs.infura.io/ipfs/${added.path}`
+            const url =  `https://stev-market.infura-ipfs.io/ipfs/${added.path}`
             setFileUrl(url)
             console.log("url",file)
             
@@ -47,7 +47,7 @@ export default function CreateItems() {
 
         try {
             const added = await client.add(data)
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
+            const url = `https://stev-market.infura-ipfs.io/ipfs/${added.path}`
             createSale(url)
             
         } catch (error) {
