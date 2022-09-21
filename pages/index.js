@@ -128,8 +128,8 @@ export default function Home() {
                 <img className="w-full h-1/2 bg-yellow object-cover" src={nft.image}></img>
                 <div className='pl-3 pt-2'>
                   <p className="text-2xl font-semibold">{nft.name}</p>
-                  <div style={{ overflow: "hidden" }}>
-                    <p className='text-gray-400'>{nft.description}</p>
+                  <div className=''>
+                    <p className='text-gray-400 w-full max-h-[49px] pr-1 overflow-hidden text-ellipsis whitespace-nowrap inline-block'>{nft.description}</p>
                   </div>
                 </div>
                 <div className='p-4 bg-black'>
